@@ -2,8 +2,8 @@ package bankomat;
 
 import java.util.ArrayList;
 
-public class KorisnikSign extends Racun implements Bank {
-	private boolean state;
+public class KorisnikSign extends Racun  {
+	
 	ArrayList<String> temp = new ArrayList<>();
 
 	KorisnikSign(ArrayList<String> temp) {
@@ -13,18 +13,12 @@ public class KorisnikSign extends Racun implements Bank {
 	public void setTemp(ArrayList<String> temp) {
 		this.temp = temp;
 	}
-
-	public boolean isState() {
-		return state;
-	}
-
-	public void setState(boolean state) {
-		this.state = state;
-	}
-
 	@Override
 	public boolean checkAccounts(int brRacuna) {
 		return super.checkAccounts(brRacuna);
 	}
-
+	public void kreirajKorisnika(String imeVlasnika, double stanjeRacuna)
+	{
+		super.kreirajKorisnika(imeVlasnika, stanjeRacuna);
+	}
 }

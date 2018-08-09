@@ -2,7 +2,7 @@ package bankomat;
 
 import java.util.ArrayList;
 
-public class KorisnikLogIN extends KorisnikSign implements Bank {
+public class KorisnikLogIN extends KorisnikSign  {
 	KorisnikLogIN(ArrayList<String> temp) {
 		super(temp);
 		// TODO Auto-generated constructor stub

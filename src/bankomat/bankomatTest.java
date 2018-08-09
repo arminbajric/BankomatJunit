@@ -77,7 +77,7 @@ public class bankomatTest {
 				if (korisnik.checkAccounts(brRacuna)) {
 
 					// definisanje stanja da je korisnik logovan
-					korisnik.setState(true);
+				
 					// ispis korisnièkog menija
 					ispisiMeni();
 					while (trigger2 != 0) {
@@ -89,7 +89,7 @@ public class bankomatTest {
 							System.out.println("Iznos za podizanje:");
 							double iznos = getInputDbl();
 							if (iznos > 0) {
-								test.podizanjeNovca(brRacuna, iznos);
+								 test.podizanjeNovca(brRacuna, iznos);
 							} else {
 								System.out.println("Pogrešan unos iznosa!Pokušajte ponovo.");
 							}
@@ -110,7 +110,7 @@ public class bankomatTest {
 							System.out.println("Iznos za transakciju");
 
 							double value = getInputDbl();
-							if (value > 0) {
+							if (value > 0&& test.checkBalance(sourceAcc, value)&& test.checkAccounts(sourceAcc)&&test.checkAccounts(targetAcc)) {
 								test.izvrsiTransakciju(sourceAcc, targetAcc, value);
 							} else {
 								System.out.println("Pogrešan unos iznosa!.Pokušajte ponovo.");
@@ -124,7 +124,7 @@ public class bankomatTest {
 							System.out.println();
 							break;
 						case 0:
-							korisnik.setState(false);
+							
 							ispisiLoginRegister();
 							System.out.println();
 							break;

@@ -14,12 +14,7 @@ public class Racun implements Bank {
 	public void kreirajKorisnika(String imeVlasnika, double stanjeRacuna)
 
 	{
-		int duzina;
-		if (baza.isEmpty()) {
-			duzina = 0;
-		} else {
-			duzina = baza.size();
-		}
+
 		do {
 
 			brojRacuna = (int) (Math.random() * 100000);
@@ -44,14 +39,6 @@ public class Racun implements Bank {
 		return brojRacuna;
 	}
 
-	private boolean isValidT(int sourceAcc, int targetAcc) {
-		if (checkAccounts(sourceAcc) && checkAccounts(targetAcc)) {
-			return true;
-		} else {
-			return false;
-		}
-	}
-
 	public boolean checkAccounts(int accNumber) {
 
 		boolean provjera = false;
@@ -62,23 +49,14 @@ public class Racun implements Bank {
 		return provjera;
 	}
 
-	public void izvrsiTransakciju(int sourceAcc, int targetAcc, double iznos) {
-		if (isValidT(sourceAcc, targetAcc) && checkBalance(sourceAcc, iznos)) {
-			smanjiStanjeRacuna(sourceAcc, iznos);
-			povecajStanjeRacuna(targetAcc, iznos);
-		} else {
-			System.out.println("Transakcija nije validna!");
-		}
-	}
-
-	private void povecajStanjeRacuna(int brojRacuna, double iznos) {
+	protected void povecajStanjeRacuna(int brojRacuna, double iznos) {
 		int indeks = baza.indexOf(Integer.toString(brojRacuna));
 		double stanje = Double.parseDouble((String) baza.get(indeks + 2));
 		stanje += iznos;
 		baza.set((indeks + 2), Double.toString(stanje));
 	}
 
-	private void smanjiStanjeRacuna(int brojRacuna, double iznos) {
+	protected void smanjiStanjeRacuna(int brojRacuna, double iznos) {
 		int indeks = baza.indexOf(Integer.toString(brojRacuna));
 		double stanje = Double.parseDouble((String) baza.get(indeks + 2));
 		stanje -= iznos;
@@ -107,7 +85,23 @@ public class Racun implements Bank {
 		System.out.println("Stanje racuna: " + baza.get(indeks + 2));
 	}
 
+	@Override
+	public void izvrsiTransakciju(int sourceAcc, int targetAcc, double iznos) {
+
+		this.smanjiStanjeRacuna(sourceAcc, iznos);
+		this.povecajStanjeRacuna(targetAcc, iznos);
+	}
+
+	@Override
 	public void podizanjeNovca(int sourceAcc, double iznos) {
 		this.smanjiStanjeRacuna(sourceAcc, iznos);
+
 	}
+
+	@Override
+	public void uplatiNovacNaRacun(int sourceAcc, double iznos) {
+		// TODO Auto-generated method stub
+
+	}
+
 }
