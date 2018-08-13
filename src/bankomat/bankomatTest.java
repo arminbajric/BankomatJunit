@@ -76,7 +76,7 @@ public class bankomatTest {
 //provjera da li se broj raèuna nalazi u bazi
 				if (korisnik.checkAccounts(brRacuna)) {
 
-					// definisanje stanja da je korisnik logovan
+				
 				
 					// ispis korisnièkog menija
 					ispisiMeni();

@@ -7,16 +7,16 @@ public class KorisnikLogIN extends KorisnikSign  {
 		super(temp);
 		// TODO Auto-generated constructor stub
 	}
-	boolean state;
+	boolean korisnikLogovan;
 	ArrayList<String> temp=new ArrayList<>();
 	public void setTemp(ArrayList<String> temp) {
 		this.temp = temp;
 	}
 	public boolean isState() {
-		return state;
+		return korisnikLogovan;
 	}
 	public void setState(boolean state) {
-		this.state = state;
+		this.korisnikLogovan = state;
 	}
 	public boolean checkAccounts(int brRacuna)
 	{
