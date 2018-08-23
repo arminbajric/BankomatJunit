@@ -1,12 +1,12 @@
 package bankomat;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class Transakcija extends Racun implements Bank {
 
-	Transakcija(ArrayList<String> temp) {
-		super(temp);
-    }
+	
 
 	public void setTemp(ArrayList<String> temp) {
 		this.temp = temp;
@@ -14,7 +14,7 @@ public class Transakcija extends Racun implements Bank {
 
 	ArrayList<String> temp = new ArrayList<>();
 
-	boolean checkBalance(int brojRacuna, double iznosSlanja)
+	boolean checkBalance(int brojRacuna, double iznosSlanja) throws FileNotFoundException
 	{
 		if(super.checkBalance(brojRacuna, iznosSlanja))
 		{
@@ -25,16 +25,16 @@ public class Transakcija extends Racun implements Bank {
 			return false;
 		}
 	}
-	public void izvrsiTransakciju(int sourceAcc, int targetAcc, double iznos) {
+	public void izvrsiTransakciju(int sourceAcc, int targetAcc, double iznos) throws IOException {
 
 		super.smanjiStanjeRacuna(sourceAcc, iznos);
 		super.povecajStanjeRacuna(targetAcc, iznos);
 
 	}
-	public void podizanjeNovca(int sourceAcc, double iznos) {
+	public void podizanjeNovca(int sourceAcc, double iznos) throws IOException {
 		super.smanjiStanjeRacuna(sourceAcc, iznos);
 	}
-	public void uplatiNovacNaRacun(int sourceAcc,double iznos)
+	public void uplatiNovacNaRacun(int sourceAcc,double iznos) throws IOException
 	{
 		super.povecajStanjeRacuna(sourceAcc, iznos);
 	}

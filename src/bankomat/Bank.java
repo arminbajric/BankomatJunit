@@ -1,12 +1,12 @@
 package bankomat;
 
-import java.util.ArrayList;
+import java.io.IOException;
+
 
 public interface Bank {
-	 void setTemp(ArrayList<String> temp) ;
-	 ArrayList<String> getTemp();
+	
 	 boolean checkAccounts(int accNumber);
-	 void izvrsiTransakciju(int sourceAcc, int targetAcc, double iznos);
-	 void podizanjeNovca(int sourceAcc, double iznos);
-	 void uplatiNovacNaRacun(int sourceAcc,double iznos);
+	 void izvrsiTransakciju(int sourceAcc, int targetAcc, double iznos) throws IOException;
+	 void podizanjeNovca(int sourceAcc, double iznos) throws IOException;
+	 void uplatiNovacNaRacun(int sourceAcc,double iznos) throws IOException;
 }

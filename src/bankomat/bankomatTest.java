@@ -1,5 +1,6 @@
 package bankomat;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
@@ -46,14 +47,15 @@ public class bankomatTest {
 	public static void ispisiMeni() {
 		System.out.println("1.Podizanje novca");
 		System.out.println("2.Transfer novca");
-		System.out.println("3.Ispisi informacije o racunu");
+		System.out.println("3.Uplati novac na raèun");
+		System.out.println("4.Ispisi informacije o racunu");
 		System.out.println("0.Izlaz");
 	}
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws IOException {
 
 		// privremeni arraylist preko kojeg se updajtuje glavna baza podataka
-		ArrayList<String> temp = new ArrayList<>();
+		
 
 		Racun test;
 		KorisnikSign korisnik;
@@ -67,29 +69,28 @@ public class bankomatTest {
 			switch (trigger) {
 			case 1:
 				// prilikom logovanja kreira se nova instanca te se updejtuje baza podataka
-				korisnik = new KorisnikLogIN(temp);
+				korisnik = new KorisnikLogIN();
 				// logovanje korisnika sa jedinstvenim brojem raèuna
 				System.out.println();
 				System.out.println("Broj raèuna:");
 
 				int brRacuna = getInputInt();
 //provjera da li se broj raèuna nalazi u bazi
+korisnik.setBrojRacuna(brRacuna);
 				if (korisnik.checkAccounts(brRacuna)) {
 
-				
-				
 					// ispis korisnièkog menija
 					ispisiMeni();
 					while (trigger2 != 0) {
 						trigger2 = getInputInt();
 						switch (trigger2) {
 						case 1:
-
-							test = new Transakcija(temp);
+//podizanje novca sa raèuna
+							test = new Transakcija();
 							System.out.println("Iznos za podizanje:");
 							double iznos = getInputDbl();
 							if (iznos > 0) {
-								 test.podizanjeNovca(brRacuna, iznos);
+								test.podizanjeNovca(brRacuna, iznos);
 							} else {
 								System.out.println("Pogrešan unos iznosa!Pokušajte ponovo.");
 							}
@@ -97,8 +98,8 @@ public class bankomatTest {
 							System.out.println();
 							break;
 						case 2:
-
-							test = new Transakcija(temp);
+//transakcija novca sa jednog raèuna na drugi
+							test = new Transakcija();
 
 							System.out.println("Broj izvornog raèuna");
 							int sourceAcc = getInputInt();
@@ -110,26 +111,43 @@ public class bankomatTest {
 							System.out.println("Iznos za transakciju");
 
 							double value = getInputDbl();
-							if (value > 0&& test.checkBalance(sourceAcc, value)&& test.checkAccounts(sourceAcc)&&test.checkAccounts(targetAcc)) {
-								test.izvrsiTransakciju(sourceAcc, targetAcc, value);
+							// validacija stanja raèuna,raèuna,odredišnog raèuna te unešene vrijednosti za
+							// transakciju
+							if (test.checkBalance(sourceAcc, value)) {
+								
+								if (value > 0 && test.checkAccounts(sourceAcc) && test.checkAccounts(targetAcc)) {
+									test.izvrsiTransakciju(sourceAcc, targetAcc, value);
+								} else {
+									System.out.println("Greška!.Pokušajte ponovo.");
+								}
 							} else {
-								System.out.println("Pogrešan unos iznosa!.Pokušajte ponovo.");
+								System.out.println("Nemate dovoljno novca na raèunu!");
 							}
+
 							ispisiMeni();
 							System.out.println();
 							break;
 						case 3:
+							test=new Transakcija();
+							System.out.println("Unesite iznos za uplatu:");
+							 iznos=getInputDbl();
+							 if(iznos>0)
+							 {
+								test.povecajStanjeRacuna(brRacuna, iznos); 
+							 }
+							break;
+						case 4:
 							korisnik.ispisiInformacije(brRacuna);
 							ispisiMeni();
 							System.out.println();
 							break;
 						case 0:
-							
+
 							ispisiLoginRegister();
 							System.out.println();
 							break;
 						}
-						
+
 					}
 				} else {
 
@@ -139,7 +157,7 @@ public class bankomatTest {
 				break;
 			case 2:
 
-				korisnik = new KorisnikRegister(temp);
+				korisnik = new KorisnikRegister();
 
 				System.out.println("Unesite ime vlasnika:");
 				String imeVlasnika = unos().nextLine();
@@ -150,12 +168,12 @@ public class bankomatTest {
 				korisnik.kreirajKorisnika(imeVlasnika, stanjeRacuna);
 				System.out.println("Vas broj racuna je: " + korisnik.getBrojRacuna());
 				ispisiLoginRegister();
-				temp = korisnik.getTemp();
-				System.out.println(korisnik.getTemp());
+			
+			
 				System.out.println();
 				break;
 			}
-			trigger2=-1;
+			trigger2 = -1;
 			trigger = getInputInt();
 		}
 	}

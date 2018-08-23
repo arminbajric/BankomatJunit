@@ -1,12 +1,10 @@
 package bankomat;
 
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 
 public class KorisnikLogIN extends KorisnikSign  {
-	KorisnikLogIN(ArrayList<String> temp) {
-		super(temp);
-		// TODO Auto-generated constructor stub
-	}
+	
 	boolean korisnikLogovan;
 	ArrayList<String> temp=new ArrayList<>();
 	public void setTemp(ArrayList<String> temp) {
@@ -15,6 +13,9 @@ public class KorisnikLogIN extends KorisnikSign  {
 	public boolean isState() {
 		return korisnikLogovan;
 	}
+	public void setBrojRacuna(int brojRacuna) {
+		super.setBrojRacuna(brojRacuna);
+	}
 	public void setState(boolean state) {
 		this.korisnikLogovan = state;
 	}
@@ -22,7 +23,7 @@ public class KorisnikLogIN extends KorisnikSign  {
 	{
 		return super.checkAccounts(brRacuna);
 		}
-	public void ispisiInformacije(int sourceAccount)
+	public void ispisiInformacije(int sourceAccount) throws FileNotFoundException
 	{
 		super.ispisiInformacije(sourceAccount);
 	}

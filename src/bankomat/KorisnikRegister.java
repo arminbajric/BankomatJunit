@@ -5,10 +5,7 @@ import java.util.ArrayList;
 public class KorisnikRegister extends KorisnikSign  {
 	ArrayList<String> temp = new ArrayList<>();
 
-	KorisnikRegister(ArrayList<String> temp) {
-		super(temp);
-
-	}
+	
 
 	public void setTemp(ArrayList<String> temp) {
 		this.temp = temp;

@@ -6,12 +6,13 @@ public class KorisnikSign extends Racun  {
 	
 	ArrayList<String> temp = new ArrayList<>();
 
-	KorisnikSign(ArrayList<String> temp) {
-		super(temp);
-	}
+	
 
 	public void setTemp(ArrayList<String> temp) {
 		this.temp = temp;
+	}
+	public void setBrojRacuna(int brojRacuna) {
+		super.setBrojRacuna(brojRacuna);
 	}
 	@Override
 	public boolean checkAccounts(int brRacuna) {
