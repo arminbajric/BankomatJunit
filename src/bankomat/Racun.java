@@ -161,7 +161,7 @@ try {
 	@Override
 	public void uplatiNovacNaRacun(int sourceAcc, double iznos) throws IOException {
 	
-
+this.povecajStanjeRacuna(sourceAcc, iznos);
 	}
 
 
